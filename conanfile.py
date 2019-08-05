@@ -5,8 +5,8 @@ from conans import ConanFile, CMake, tools
 class AmqpcppConan(ConanFile):
     name = "amqpcpp"
     version = "4.1.5"
-    url = "https://github.com/theirix/conan-amqpcpp"
-    author = "theirix@gmail.com"
+    url = "https://github.com/pss146/conan-amqpcpp"
+    author = "stat.perepel@gmail.com"
     homepage = "https://github.com/CopernicaMarketingSoftware/AMQP-CPP"
     license = "Apache-2.0"
     description = "C++ library for asynchronous non-blocking communication with RabbitMQ"
@@ -33,13 +33,13 @@ class AmqpcppConan(ConanFile):
         shutil.copy("CMakeLists.txt",
                     os.path.join(self._source_subfolder, "CMakeLists.txt"))
 
-    def configure(self):
-        if self.settings.os == "Windows":
-            raise Exception("Windows is not supported by upstream")
+    # def configure(self):
+    #     if self.settings.os == "Windows":
+    #         raise Exception("Windows is not supported by upstream")
 
     def requirements(self):
         if int(self.majorver) >= 3:
-            self.requires.add("OpenSSL/1.0.2s@conan/stable")
+            self.requires.add("OpenSSL/1.1.1@conan/stable")
 
     def build(self):
         cmake = CMake(self)
@@ -50,7 +50,7 @@ class AmqpcppConan(ConanFile):
         if self.majorver >= 3:
             cmake.definitions['AMQP-CPP_BUILD_SHARED'] = self.options.shared
             cmake.definitions['AMQP-CPP_BUILD_EXAMPLES'] = False
-            cmake.definitions['AMQP-CPP_LINUX_TCP'] = True
+            cmake.definitions['AMQP-CPP_LINUX_TCP'] = False
 
         cmake.configure(source_folder=self._source_subfolder)
         # do not install because versions 2 and 3 differs a lot in layout
