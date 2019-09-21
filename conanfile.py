@@ -30,7 +30,7 @@ class AmqpcppConan(ConanFile):
         shutil.copy("CMakeLists.txt", os.path.join(self._source_subfolder, "CMakeLists.txt"))
 
     def requirements(self):
-        self.requires.add("OpenSSL/1.1.1@conan/stable")
+        self.requires.add("OpenSSL/1.1.1c@conan/stable")
 
     def build(self):
         cmake = CMake(self)
