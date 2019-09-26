@@ -6,9 +6,9 @@ class AmqpcppConan(ConanFile):
     name = "amqpcpp"
     version = "4.1.5"
     url = "https://github.com/pss146/conan-amqpcpp"
-    author = "stat.perepel@gmail.com"
+    author = "simon.lepasteur@swissdotnet.ch"
     homepage = "https://github.com/CopernicaMarketingSoftware/AMQP-CPP"
-    license = "Apache-2.0"
+    license = "MIT"
     description = "C++ library for asynchronous non-blocking communication with RabbitMQ"
     settings = "os", "compiler", "build_type", "arch"
     options = {"shared": [True, False]}
