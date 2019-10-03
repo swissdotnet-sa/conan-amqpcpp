@@ -11,8 +11,8 @@ class AmqpcppConan(ConanFile):
     license = "MIT"
     description = "C++ library for asynchronous non-blocking communication with RabbitMQ"
     settings = "os", "compiler", "build_type", "arch"
-    options = {"shared": [True, False]}
-    default_options = {"shared": False}
+    options = {"shared": [True, False], "tcp": [True, False]}
+    default_options = {"shared": False, "tcp": False}
     generators = "cmake"
     exports = ["LICENSE.md"]
     exports_sources = ["CMakeLists.txt"]
@@ -36,7 +36,7 @@ class AmqpcppConan(ConanFile):
         cmake = CMake(self)
         cmake.definitions['AMQP-CPP_BUILD_SHARED'] = self.options.shared
         cmake.definitions['AMQP-CPP_BUILD_EXAMPLES'] = False
-        cmake.definitions['AMQP-CPP_LINUX_TCP'] = False
+        cmake.definitions['AMQP-CPP_LINUX_TCP'] = self.options.tcp
         cmake.configure(source_folder=self._source_subfolder)
         cmake.build()
 
